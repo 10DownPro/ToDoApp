@@ -12,7 +12,7 @@ router.use(function timeLog (req, res, next) {
 
 router.get('/shelby', (req, res) => {
     console.log('this is Shelby page');
-    res.send("Testing 1 2 3. . .");
+    res.send("this is Shelby page");
 });
 
 
