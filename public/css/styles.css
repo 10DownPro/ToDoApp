@@ -1,0 +1,16 @@
+body {
+    background-color: aqua;
+    font-size: 30px;
+}
+
+.wrapper {
+    width: 700px;
+    margin: 0 auto;
+    background-color: azure;
+    padding: 20px;
+}
+
+header, footer {
+    background-color: lightblue;
+    padding: 20px;
+}
