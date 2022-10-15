@@ -8,17 +8,17 @@ router.use(function timeLog (req, res, next) {
 });
 
 
-router.get('/login', (req, res) => {
+router.get('/task-list', (req, res) => {
     
-    return res.send(`<h1>This is login page</h1>`)
+    return res.send(`<h1>This is task-list page</h1>`)
 });
 
-router.post('/login', (req, res) => {
+router.post('/task-list', (req, res) => {
     const { email, password} = req.body;
 
     console.log(email);
     
-    return res.send(`<h1>Thank you for logining!!</h1>`);
+    return res.send(`<h1>Thank you for adding your tasks!!</h1>`);
 });
 
 module.exports = router

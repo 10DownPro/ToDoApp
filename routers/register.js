@@ -3,14 +3,22 @@ const express = require('express');
 const router = express.Router();
 
 router.use(function timeLog (req, res, next) {
-    console.log('Time:', Date.now(), 'review.js');
+    console.log('Time:', Date.now(), 'register.js');
     next();
 });
 
 
-router.get('/review', (req, res) => {
-    console.log('this is review page');
-    res.send("this is review page");
+router.get('/register', (req, res) => {
+    
+    return res.render('register')
+});
+
+router.post('/register', (req, res) => {
+    const { firstName, lastName, email, password} = req.body;
+
+    console.log(firstName);
+    
+    return res.render(`register`);
 });
 
 
