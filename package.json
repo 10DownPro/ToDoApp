@@ -2,10 +2,13 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20"
+    "express-layout": "^0.1.0",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "sequelize": "^6.25.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "name": "todoapp",
   "version": "1.0.0",
@@ -21,5 +24,8 @@
     "url": "https://github.com/10DownPro/ToDoApp/issues"
   },
   "homepage": "https://github.com/10DownPro/ToDoApp#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "sequelize-cli": "^6.5.1"
+  }
 }
