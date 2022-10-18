@@ -24,9 +24,8 @@ app.use('/css', express.static(__dirname + 'public/css'));
 
 app.set('layout', './layouts/full-width');
 
-// app.set('layout', './register');
-app.use(require('./routers/register'));
-// app.use(require('./routers/login'));
+app.use(require('../routers/routers/register'));
+app.use(require('../routers/routers/login'));
 // app.use(require('./routers/authentication'));
 
 app.get('/', (req, res) => {
