@@ -25,14 +25,14 @@ app.use('/css', express.static(__dirname + 'public/css'));
 app.set('layout', './layouts/full-width');
 
 // app.set('layout', './register');
-app.use(require('./routers/register'));
+// app.use(require('./routers/register'));
 // app.use(require('./routers/login'));
-// app.use(require('./routers/authentication'));
+app.use(require('./routers/authentication'));
 
-app.get('/', (req, res) => {
-    console.log("This is home page");
-    res.render('index' , {title: 'Home Page'});
-});
+// app.get('/', (req, res) => {
+//     console.log("This is home page");
+//     res.render('index' , {title: 'Home Page'});
+// });
 
 app.listen(port, () => {
     console.log(`Server is running at port: ${port}`);

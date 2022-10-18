@@ -9,13 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      username: {
+        type: Sequelize.STRING(25)
+      },
       task: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING
-      },
-      isCompleted: {
+      isComplete: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
