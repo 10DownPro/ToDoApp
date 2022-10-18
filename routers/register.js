@@ -10,7 +10,8 @@ router.use(function timeLog (req, res, next) {
 
 router.get('/register', (req, res) => {
     
-    return res.render('register')
+    return res.render(`register`, {title: 'register'})
+
 });
 
 router.post('/register', (req, res) => {

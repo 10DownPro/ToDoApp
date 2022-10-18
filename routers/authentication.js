@@ -8,22 +8,11 @@ router.use(function timeLog (req, res, next) {
 });
 
 
-// router.get('/register', (req, res) => {
-//     console.log('this is register page');
-
-//     return res.send("Testing 1 2 3. . .")
-// });
-
-// router.post('/register', (req, res) => {
+router.get('/logot', (req, res) => {
     
-//      const { username, password } = req.body;
-//      console.log(username, password);
-//     return res.send("Testing 1 2 3. . .")
-// });
+console.log('User Logged out');
 
-// router.get('/login', (req, res) => {
-//     console.log('this is login page');
-//     res.send("Testing 1 2 3. . .");
-// });
+    res.redirect('login')
+});
 
 module.exports = router

@@ -3,22 +3,24 @@ const express = require('express');
 const router = express.Router();
 
 router.use(function timeLog (req, res, next) {
-    console.log('Time:', Date.now(), 'register.js');
+    console.log('Time:', Date.now(), 'login.js');
     next();
 });
 
 
 router.get('/login', (req, res) => {
     
-    return res.send(`<h1>This is login page</h1>`)
+    return res.render(`login`, {title: 'Login'})
+
 });
 
 router.post('/login', (req, res) => {
     const { email, password} = req.body;
 
-    console.log(email);
+    console.log(firstName);
     
-    return res.send(`<h1>Thank you for logining!!</h1>`);
+    return res.render(`login`);
 });
+
 
 module.exports = router
