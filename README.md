@@ -30,7 +30,7 @@ To-Do-App Website
 
 
 # Purpose of the Repository:
-We all want to manage our time doing the day to maximize our hours.
+We all want to manage our time during the day to maximize our hours.
 This To-Do-App website will help you stay organized and efficient as well 
 as keep track of completed tasks.
 
