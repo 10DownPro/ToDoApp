@@ -28,16 +28,49 @@ router.post('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
     
-    return res.render(`login`, {title: 'Login'})
+    return res.render(`login`, {title: 'Login' , pageID: 'loginPage'});
 
 });
 
-router.post('/login', (req, res) => {
-    const { email, password} = req.body;
+router.post('/login', async (req, res) => {
+
+    try {
+        const { email, password } = req.body;
+
+        const records = await User.findAll({where: {password: password}});
+
+        if(records !== null) {
+            if(password !== records[0].dataValues.password){
+
+                console.log('Passwords do not match!');
+                return res.render('/login')
+            }
+            else {
+                return res.redirect('task-list')
+            };
+
+        }
+        
+    } catch (error) {
+
+        console.log('Password do not match!');
+        return res.render('/login')
+
+    }
+});
+
+router.get('/task-list', (req, res) => {
+    
+    return res.render(`task-list`, {title: 'task-list'})
+
+});
+
+router.post('/task-list', (req, res) => {
+    const { firstName, lastName, email, password} = req.body;
 
     console.log(firstName);
     
-    return res.render(`login`);
+    return res.render(`task-list`);
 });
 
 
