@@ -4,11 +4,16 @@ To-Do-App Website
 # Project Link: 
 
 # Team Members:
-Shelby
+## Shelby
+
 [![Alt text](https://ca.slack-edge.com/T0569RDC6-U03JHBDNFQB-4899e2a9aacb-512)]
-Naomi
+
+## Naomi
+
 [![Alt text](https://ca.slack-edge.com/T0569RDC6-U02TAH6FC6T-383077ddaae6-512)]
-T’Vedt
+
+## T’Vedt
+
 [![Alt text](https://ca.slack-edge.com/T0569RDC6-U03JW3DLDED-528553143f90-512)]
 
 # CONTENTS OF THIS FILE
@@ -20,6 +25,9 @@ T’Vedt
  * Configuration
  * Troubleshooting
  * Maintainers
+  
+# Introduction
+
 
 # Purpose of the Repository:
 We all want to manage our time doing the day to maximize our hours.
@@ -58,7 +66,18 @@ as keep track of completed tasks.
 * Setup route in routes.js to add todos
   
 # Configuration
+  require('dotenv').config();
 
+module.exports = {
+  "development": {
+    
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
+    "dialect": "postgres"
+  }
+ };
 
 # Troubleshooting
 
