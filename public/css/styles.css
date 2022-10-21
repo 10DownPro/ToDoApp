@@ -14,3 +14,9 @@ header, footer {
     background-color: lightblue;
     padding: 20px;
 }
+
+.paragraph-styling {
+    margin: 0;
+    cursor: pointer;
+    font-size: 20px;
+}

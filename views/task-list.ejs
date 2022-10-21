@@ -5,15 +5,29 @@
   </head>
   <body>
 
-    <div id="myDIV" class="header">
-        <h2>My To Do List</h2>
-        <form action="/action_page.php">
+        <h2>To-Do List</h2>
+       
+    <div class="container">
+        <input id="inputField" type="text"><button id="addToDo">+</button>
+        <div class="to-dos" id="toDoContainer"></div>
+    </div>
 
-            <input type="text" placeholder="Enter task here" id="task">
-            <input type="submit" value="Submit">
-          </form>
-      </div>
-      
+      <script>
+        let addToDoButton = document.getElementById('addToDo');
+        let toDoContainer = document.getElementById('toDoContainer');
+        let inputField = document.getElementById('inputField');
+        
+
+        addToDoButton.addEventListener('click', function() {
+
+            let paragraph = document.createElement('p');
+            paragraph.classList.add('paragraph-styling');
+            paragraph.innerText = inputField.value;
+            toDoContainer.appendChild(paragraph);
+            inputField.value = " ";
+
+        })
+      </script>
 
 
   </body>
