@@ -32,7 +32,7 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
 
     
-    const { firstName, lastName, email, username, password} = req.body;
+    const { email, password} = req.body;
 
     console.log(firstName);
     
@@ -48,10 +48,10 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    const { username, password} = req.body;
+    const { email, password} = req.body;
 
     console.log(username);
-    // const records = await User.findAll({where: {username: username}});
+    // const records = await User.findAll({where: {email: email}});
     
     return res.render(`login`);
 });
