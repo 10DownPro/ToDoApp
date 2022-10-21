@@ -9,8 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(25)
+      email: {
+        type: Sequelize.STRING(25),
+        onDelete: 'CASCADE',
+        references: {
+                model: 'Users',
+                key: 'email',
+                as: 'userEmail'
+        }
       },
       task: {
         type: Sequelize.STRING

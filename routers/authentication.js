@@ -2,6 +2,12 @@
 const express = require('express');
 const router = express.Router();
 
+const {User} = require('../helpers/dbConnections');
+
+// const Sequelize = require('sequelize');
+
+// const { User } = require('../models');
+
 router.use(function timeLog (req, res, next) {
     console.log('Time:', Date.now(), 'authentication.js');
     next();
@@ -9,19 +15,24 @@ router.use(function timeLog (req, res, next) {
 
 router.get('/', (req, res) => {
     console.log("This is home page");
-    res.render('index' , {title: 'Home Page'});
+    res.render('index' , {
+        title: 'Home Page',
+        // pageID 'homePage'
+    });
 });
 
 router.get('/register', (req, res) => {
     
-    return res.render(`register`, {title: 'Register'})
-
+    return res.render(`register`, {
+        title: 'Register',
+        // pageID: 'registerPage'
+    });
 });
 
 router.post('/register', (req, res) => {
 
     
-    const { firstName, lastName, email, password} = req.body;
+    const { firstName, lastName, email, username, password} = req.body;
 
     console.log(firstName);
     
@@ -30,14 +41,17 @@ router.post('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
     
-    return res.render(`login`, {title: 'Login'})
-
+    return res.render(`login`, {
+        title: 'Login',
+        pageID: 'loginPage'
+    });
 });
 
 router.post('/login', (req, res) => {
-    const { email, password} = req.body;
+    const { username, password} = req.body;
 
-    console.log(firstName);
+    console.log(username);
+    // const records = await User.findAll({where: {username: username}});
     
     return res.render(`login`);
 });

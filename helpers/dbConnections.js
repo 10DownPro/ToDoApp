@@ -2,9 +2,9 @@
 
 const Sequelize = require('sequelize');
 
-const { User, Tasks } = require('../models');
+const { User, Task } = require('../models');
 
 module.exports = {
     User,
-    Tasks,
+    Task,
 }

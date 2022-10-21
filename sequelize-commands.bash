@@ -13,10 +13,9 @@ npm i --save-dev sequelize-cli
 
 npx sequelize-cli init
 
-npx sequelize-cli model:generate --name User --attributes 'firstName:string,
-lastName:string,email:string,username:string,password:string'
+npx sequelize-cli model:generate --name User --attributes 'email:string,password:string'
 
-npx sequelize-cli model:generate --name Tasks --attributes 'username:string,
+npx sequelize-cli model:generate --name Task --attributes 'email:string,
 task:string,isComplete:boolean'
 
 npx sequelize-cli db:create
