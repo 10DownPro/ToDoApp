@@ -8,23 +8,23 @@
         <h2>To-Do List</h2>
        
     <div class="container">
-        <input id="inputField" type="text"><button id="addToDo">+</button>
+        <input id="task" name='task' type="text"><button id="addToDo">+</button>
         <div class="to-dos" id="toDoContainer"></div>
     </div>
 
       <script>
         let addToDoButton = document.getElementById('addToDo');
         let toDoContainer = document.getElementById('toDoContainer');
-        let inputField = document.getElementById('inputField');
+        let task = document.getElementById('task');
         
 
         addToDoButton.addEventListener('click', function() {
 
             let paragraph = document.createElement('p');
             paragraph.classList.add('paragraph-styling');
-            paragraph.innerText = inputField.value;
+            paragraph.innerText = task.value;
             toDoContainer.appendChild(paragraph);
-            inputField.value = " ";
+            task.value = " ";
 
         })
       </script>
