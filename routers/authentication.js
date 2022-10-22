@@ -3,7 +3,10 @@ const express = require('express');
 const router = express.Router();
 const taskList = [];
 
-const {User} = require('../helpers/dbConnections');
+const {User, Task} = require('../helpers/dbConnections');
+
+const bcrypt = require('bcrypt');
+
 
 // const Sequelize = require('sequelize');
 
@@ -30,12 +33,51 @@ router.get('/register', (req, res) => {
     });
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
 
-    const { email, password} = req.body;
+    try {
+        const { email, password } = req.body;
+        // The order of the variables DOES matter
+        // console.log(password);
 
+        const records = await User.findAll({where: {email: email}});
+        // console.log(records.length);
+        if(records.length === 0) {
+
+            //encrypt the password
+            bcrypt.hash(password, 10, async (error, hash) => {
+                // add to database
+                if(error) {
+                    console.log(`error with the hash: ${error}`);
+                    return res.redirect('register');
+                    // return res.send('register');
+                }
+                else {
+                    const newUser = await User.create({
+                        email: email, 
+                        password: hash
+                    });
+                    // console.log(newUser);
+                }
+            })
+
+            // on success go to login page
+            return res.redirect(`login`);
+        }
+        else {
+            //email was found in our db, return an error
+            console.log('Email already exists');
+
+            // return res.status(422).send({error: 'Email already exits'})
+            return res.status(422).send(`<h2>Email already exits: ${error}</h2>`)
+        }
+
+
+    } catch (error) {
+        // return res.status(422).send({error: 'Email already exits'})
+        return res.status(422).send(`<h2>Ooops! An error happend: ${error}</h2>`)
+    }
     
-    return res.render(`register`);
 });
 
 router.get('/login', (req, res) => {
@@ -46,23 +88,39 @@ router.get('/login', (req, res) => {
     });
 });
 
+
+
 router.post('/login', async (req, res) => {
 
     try {
         const { email, password } = req.body;
+        // console.log(email, password);
 
-        const records = await User.findAll({where: {password: password}});
+        const records = await User.findAll({where: {email: email}});
+        console.log(records[0].password);
 
         if(records !== null) {
-            if(password !== records[0].dataValues.password){
+            try {
+                const isMatch = await bcrypt.compare(password, records[0].password)
+                console.log(isMatch);
 
-                console.log('Passwords do not match!');
-                return res.render('/login')
+                if(isMatch) {
+                    // assign the username to create the session
+                    console.log('im here now')
+                    req.session.user = email
+                    return res.redirect('task-list');
+                }
+                else if(!isMatch) {
+                    // Passwords don't match, back to login
+                    console.log(`Passwords don't match`);
+                    return res.redirect('login');
+                }
+                
+            } catch (error) {
+                //no user found, go to register, can't access db, etc
+                console.log(`No records found for user: ${username}`);
+                    return res.redirect('register');
             }
-            else {
-                return res.redirect('task-list')
-            };
-
         }
         
     } catch (error) {
@@ -74,19 +132,44 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/task-list', (req, res) => {
-    
-    return res.render(`task-list`, {title: 'task-list'})
-
+    console.log('task-list');
+    return res.render(`task-list`, {
+        title: 'task-list'
+    })
+    // return res.send(`task-list`)
 });
 
-router.post('/task-list', (req, res) => {
+router.post('/task-list', async (req, res) => {
 
-    console.log(username);
-    // const records = await User.findAll({where: {email: email}});
-    
-    return res.render(`task-list`);
+    try {
+        const { task } = req.body;
+        // The order of the variables DOES matter
+        // console.log(password);
 
-    taskList.push(req.body)
+        // make this an update ccommand to the DB
+        const records = await User.findAll({where: {email: email}});
+        // console.log(records.length);
+        try {
+
+            const task = await Task.update({
+                task: task,
+            });
+            // on success go to login page
+            return res.redirect(`login`);
+        }
+        catch(error) {
+            //email was found in our db, return an error
+            console.log('Email already exists');
+
+            // return res.status(422).send({error: 'Email already exits'})
+            return res.status(422).send(`<h2>Email already exits: ${error}</h2>`)
+        }
+
+
+    } catch (error) {
+        // return res.status(422).send({error: 'Email already exits'})
+        return res.status(422).send(`<h2>Ooops! An error happend: ${error}</h2>`)
+    }
 
 });
 

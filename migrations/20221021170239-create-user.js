@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tasks', {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,19 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       email: {
-        type: Sequelize.STRING(25),
-        onDelete: 'CASCADE',
-        references: {
-                model: 'Users',
-                key: 'email',
-                as: 'userEmail'
-        }
+        type: Sequelize.STRING(25)
       },
-      task: {
-        type: Sequelize.STRING
-      },
-      isComplete: {
-        type: Sequelize.BOOLEAN
+      password: {
+        type: Sequelize.STRING(100)
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +26,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tasks');
+    await queryInterface.dropTable('Users');
   }
 };
