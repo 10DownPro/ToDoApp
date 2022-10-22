@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const app = express();
 
+
 const port = 3009;
 // const port = process.env.PORT || 3007;
 
@@ -16,8 +17,6 @@ app.use(express.static('public'));
 app.set('views' , path.join(__dirname, 'views'));
 
 app.set('view engine', 'ejs');
-
-app.use('/css', express.static(__dirname + 'public/css'));
 
 
 app.use(require('./routers/authentication'));

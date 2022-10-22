@@ -1,6 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
+const taskList = [];
 
 const {User} = require('../helpers/dbConnections');
 
@@ -31,10 +32,8 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
 
-    
     const { email, password} = req.body;
 
-    console.log(firstName);
     
     return res.render(`register`);
 });
@@ -81,12 +80,14 @@ router.get('/task-list', (req, res) => {
 });
 
 router.post('/task-list', (req, res) => {
-    const { firstName, lastName, email, password} = req.body;
 
     console.log(username);
     // const records = await User.findAll({where: {email: email}});
     
     return res.render(`task-list`);
+
+    taskList.push(req.body)
+
 });
 
 
