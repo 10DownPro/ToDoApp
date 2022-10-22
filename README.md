@@ -87,6 +87,7 @@ module.exports = {
 # Acknowledgments
    * Jose Tollinchi's youtube videos series
    * GitHub Pages
+  
    * web-pt-07-2022-cor Instructors and TA's
    * https://www.youtube.com/watch?v=lYVKbAn5Od0
   
