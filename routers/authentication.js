@@ -3,6 +3,12 @@ const express = require('express');
 const router = express.Router();
 const taskList = [];
 
+const {User} = require('../helpers/dbConnections');
+
+// const Sequelize = require('sequelize');
+
+// const { User } = require('../models');
+
 router.use(function timeLog (req, res, next) {
     console.log('Time:', Date.now(), 'authentication.js');
     next();
@@ -10,16 +16,22 @@ router.use(function timeLog (req, res, next) {
 
 router.get('/', (req, res) => {
     console.log("This is home page");
-    res.render('index' , {title: 'Home Page'});
+    res.render('index' , {
+        title: 'Home Page',
+        // pageID 'homePage'
+    });
 });
 
 router.get('/register', (req, res) => {
     
-    return res.render(`register`, {title: 'Register'})
-
+    return res.render(`register`, {
+        title: 'Register',
+        // pageID: 'registerPage'
+    });
 });
 
 router.post('/register', (req, res) => {
+
     const { email, password} = req.body;
 
     
@@ -28,8 +40,10 @@ router.post('/register', (req, res) => {
 
 router.get('/login', (req, res) => {
     
-    return res.render(`login`, {title: 'Login' , pageID: 'loginPage'});
-
+    return res.render(`login`, {
+        title: 'Login',
+        pageID: 'loginPage'
+    });
 });
 
 router.post('/login', async (req, res) => {
@@ -66,6 +80,11 @@ router.get('/task-list', (req, res) => {
 });
 
 router.post('/task-list', (req, res) => {
+
+    console.log(username);
+    // const records = await User.findAll({where: {email: email}});
+    
+    return res.render(`task-list`);
 
     taskList.push(req.body)
 
