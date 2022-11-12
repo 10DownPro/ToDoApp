@@ -7,27 +7,30 @@
 
         <h2>To-Do List</h2>
        
-    <div class="container">
+    <!-- <div class="container">
         <input id="task" name='task' type="text"><button id="addToDo">+</button>
         <div class="to-dos" id="toDoContainer"></div>
+    </div> -->
+
+    <form action="task-list" method="POST">  
+      <div class="container">
+          <input id="taskInput" name="taskInput" type="text">
+          <button type='submit' id="addToDo">+</button>
+      </div>
+    </form>
+    <div class="to-dos" id="toDoContainer">
+      <% allTask.forEach((task)=>{%>
+        <div>
+          <p>Task: <%=task.task%></p>
+          <p>Completed: <%=task.isComplete%></p>
+        </div>
+
+
+
+        <%});%>
+
     </div>
 
-      <script>
-        let addToDoButton = document.getElementById('addToDo');
-        let toDoContainer = document.getElementById('toDoContainer');
-        let task = document.getElementById('task');
-        
-
-        addToDoButton.addEventListener('click', function() {
-
-            let paragraph = document.createElement('p');
-            paragraph.classList.add('paragraph-styling');
-            paragraph.innerText = task.value;
-            toDoContainer.appendChild(paragraph);
-            task.value = " ";
-
-        })
-      </script>
 
 
   </body>

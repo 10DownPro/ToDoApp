@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require("express");
-const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const cookieParser = require('cookie-parser')
 require('dotenv').config();
 
 const app = express();
@@ -35,7 +35,7 @@ app.use(
 
 
 app.use(require('./routers/authentication'));
-// app.use(require('./routes/review'));
+app.use(require('./routers/task-list'));
 
 
 app.listen(port, () => {
