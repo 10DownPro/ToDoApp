@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const taskList = [];
+const { uuid } = require('uuidv4');
 
 const {User, Task} = require('../helpers/dbConnections');
 
@@ -54,6 +54,7 @@ router.post('/register', async (req, res) => {
                 }
                 else {
                     const newUser = await User.create({
+                        id: uuid(),
                         email: email, 
                         password: hash
                     });
@@ -108,6 +109,7 @@ router.post('/login', async (req, res) => {
                     // assign the username to create the session
                     console.log('im here now')
                     req.session.user = email
+                    // console.log(req.session.user);
                     return res.redirect('task-list');
                 }
                 else if(!isMatch) {
@@ -129,48 +131,6 @@ router.post('/login', async (req, res) => {
         return res.render('/login')
 
     }
-});
-
-router.get('/task-list', (req, res) => {
-    console.log('task-list');
-    return res.render(`task-list`, {
-        title: 'task-list'
-    })
-    // return res.send(`task-list`)
-});
-
-router.post('/task-list', async (req, res) => {
-
-    try {
-        const { task } = req.body;
-        // The order of the variables DOES matter
-        // console.log(password);
-
-        // make this an update ccommand to the DB
-        const records = await User.findAll({where: {email: email}});
-        // console.log(records.length);
-        try {
-
-            const task = await Task.update({
-                task: task,
-            });
-            // on success go to login page
-            return res.redirect(`login`);
-        }
-        catch(error) {
-            //email was found in our db, return an error
-            console.log('Email already exists');
-
-            // return res.status(422).send({error: 'Email already exits'})
-            return res.status(422).send(`<h2>Email already exits: ${error}</h2>`)
-        }
-
-
-    } catch (error) {
-        // return res.status(422).send({error: 'Email already exits'})
-        return res.status(422).send(`<h2>Ooops! An error happend: ${error}</h2>`)
-    }
-
 });
 
 
